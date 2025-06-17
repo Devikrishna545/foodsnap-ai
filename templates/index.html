@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FoodSnap AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link id="theme-style" rel="stylesheet" href="/static/css/theme-light.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FoodSnap AI</h1>
+            <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+            <a href="{{ url_for('logout_view') }}" style="margin-left:auto;font-size:1rem;">Logout</a>
+        </header>
+        <main>
+            <div class="upload-section">
+                <label for="imageInput" class="upload-label">
+                    <span>Choose a food image</span>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                </label>
+                <button id="analyzeBtn">Analyze</button>
+            </div>
+            <div id="preview"></div>
+            <div id="result-card" class="result-card" style="display:none;">
+                <h2>Analysis Result</h2>
+                <div id="result-table-container">
+                    <table id="result-table" style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;">Food Item</th>
+                                <th style="text-align:left;">Calories</th>
+                                <th style="text-align:left;">Portion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result-table-body">
+                            <!-- Results will be injected here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="error" class="error"></div>
+        </main>
+        <footer>
+            <span>© 2025 FoodSnap AI</span>
+        </footer>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

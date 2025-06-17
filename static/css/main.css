@@ -1,0 +1,98 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
+.container {
+    max-width: 500px !important;
+    margin: 2rem auto;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem;
+}
+.container-narrow-sm {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: color 0.3s;
+}
+.upload-section {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0 1rem 0;
+    align-items: center;
+}
+.upload-label {
+    background: var(--button-bg);
+    color: var(--button-text);
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+}
+#analyzeBtn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#analyzeBtn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+#preview img {
+    max-width: 100%;
+    margin: 1rem 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.result-card {
+    background: var(--result-bg);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.result-card h2 {
+    margin-top: 0;
+}
+#error {
+    color: #e74c3c;
+    margin-top: 1rem;
+    font-weight: 500;
+    min-height: 1.5em;
+}
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    color: var(--footer-text);
+    font-size: 0.95rem;
+}

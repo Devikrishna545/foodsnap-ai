@@ -185,10 +185,63 @@ While specific criteria might be announced, generally projects are evaluated on:
 *   **Presentation/Demo:** How well you explain and showcase your project.
 *   **Adherence to Submission Guidelines:** Including a good project `README.md` and following the Git workflow.
 
+## Project Workflow
 
----
+1. **Frontend (HTML/JS/CSS)**
+   - User uploads a food image via a modern UI.
+   - The image is converted to base64 and sent as JSON to the Flask backend `/upload/` endpoint.
+   - The UI supports light/dark themes and displays results in a table with total calories.
 
-Good luck, innovators! We can't wait to see your FoodSnap AI creations. Remember to have fun, learn, and collaborate!
+2. **Backend (Flask)**
+   - `/upload/` endpoint receives the image (base64 + filename), decodes and saves it in `static/uploads/`.
+   - The backend then calls `/analyze-food/` internally, passing the saved image path.
+   - `/analyze-food/` reads the image, validates it, preprocesses it, and sends it to the Gemini multimodal LLM.
+   - The Gemini LLM returns a JSON with food items, calories, and portions, which is sent back to the frontend.
 
-**Happy Hacking!**
-The WeCode Community Dev Team
+3. **Image Processing & Validation**
+   - Images are validated for allowed formats and checked if they are food images using a pretrained classifier (PyTorch).
+   - Images are preprocessed (resized, aspect ratio maintained, compressed if needed).
+
+4. **LLM Integration**
+   - The Gemini multimodal API is called using the `google.generativeai` Python library.
+   - The prompt and food labels are managed in a separate config file.
+   - The LLM response is parsed and returned as structured JSON.
+
+5. **Results Display**
+   - The frontend displays the analysis in a table, including a total calories row.
+
+## Design Patterns & System Architecture
+
+- **MVC Pattern**: 
+  - *Model*: Food classifier, preprocessing, and LLM integration in backend.
+  - *View*: Jinja2 HTML templates and CSS for UI.
+  - *Controller*: Flask routes handle user requests and orchestrate processing.
+
+- **Separation of Concerns**:
+  - Configuration (labels, prompts) is separated into a config file.
+  - Static files (CSS/JS) and templates are organized in their respective folders.
+
+- **API Gateway**:
+  - All user interactions go through the Flask API endpoints.
+
+- **Internal Service Calls**:
+  - The `/upload/` endpoint internally calls `/analyze-food/` for streamlined workflow.
+
+- **Extensibility**:
+  - Easy to swap out the food classifier or LLM integration.
+  - Modular JS and CSS for UI enhancements.
+
+- **Security & Validation**:
+  - File type and content validation on backend.
+  - Only allowed image formats are processed.
+
+## What I Have Done
+
+- Designed and implemented a modern, theme-switchable UI for food image upload and analysis.
+- Built a Flask backend with endpoints for image upload and food analysis.
+- Implemented image validation, preprocessing, and food classification using PyTorch.
+- Integrated Gemini multimodal LLM for food, calorie, and portion analysis.
+- Structured results as JSON and displayed them in a clear table with total calories.
+- Organized configuration, static files, and templates for maintainability.
+- Added artificial delays to simulate real-world processing times.
+- Ensured robust error handling and user feedback throughout the workflow.
